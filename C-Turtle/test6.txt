@@ -1,0 +1,12 @@
+{
+  SET H := 100 ;
+  DO U FROM 1 TO 2 {
+    SET V := U 1 + ;
+    DO W FROM V TO U {
+      DO G FROM V TO V {
+        LT 90 
+        FD H
+      }
+    }
+  }
+}

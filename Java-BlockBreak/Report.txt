@@ -1,0 +1,15 @@
+READY FOR MARKING. Just compile all .java files. main() can be found in the Game class.
+
+All code is original and no external libraries were used.
+
+
+
+The first hurdle to overcome was getting used to the graphics thread and working out how to structure my program. Putting an instance of the Blocks class in the Display class felt strange since until now I have always done it the other way around. But here it felt that there was not a sufficient reason to keep the logic of the game separate from the graphics, since they were so fundamentally linked. The Ball and the Player did not deserve representation that was not graphics-based, and since the Bricks were dependent entirely on these two things, I decided to have all of the game elements (bundled together in the Blocks class) within the Display.
+
+At first I decided to create bubbles instead of blocks. This was because I thought it would be easier to detect collision with round shapes (as the ball is also round), therefore one can find the distance between the centres of the shapes and determine whether they are colliding or not based on the radius of both of the shapes. However, this proved difficult, and I changed the game to be about blocks instead of bubbles. Each block has four edges, which are much easier to calculate than the curved edge of a bubble. It seemed so much simpler, I kicked myself for not realising it sooner.
+
+
+My proudest part of the code is the Options class. I started off with two options, the player size and the ball speed. The DynamicInteger class was required as a wrapper for primitive ints, so that I could pass a 'pointer', as it were, as ints themselves are immutable and cannot be modified outside of the class.
+The code for different options would largely have been the same, so I decided to create the inner Option class. Once I had it written it was incredibly easy to add further options for whatever element of the game I felt could be modified by the user. All I needed to do was change the int variable to a DynamicInteger and write a single line of code in Display's option() method.
+
+One idea for the future would be to make all of the grid values DynamicIntegers so that they take more than one hit to break. The 'smash' method is already able to deal with this, but things to implement would be the DynamicInteger array and the colour changing to reflect how close each block is to breaking.

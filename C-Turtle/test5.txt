@@ -1,0 +1,8 @@
+{
+  SET X := 50 4 * 2 / ;
+  SET Y := 45 180 135 - + ;
+  DO Z FROM 1 TO 4 {
+    LT Y
+    FD X
+  }
+}

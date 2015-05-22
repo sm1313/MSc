@@ -1,0 +1,4 @@
+{
+  DO A FROM 1 TO 10 {
+    FD 10
+  }

@@ -1,0 +1,18 @@
+{
+  PEN 0 0 255
+  LT 90
+  FD 100
+  SET R := 255 ;
+  PEN R 0 0 
+  LT 90 
+  FD 100 
+  SET G := R ;
+  PEN 0 G 0 
+  LT 90
+  FD 100
+  PEN R G 0 
+  LT 90
+  FD 100
+  SET R := R R - ;
+  PEN R 0 0
+}

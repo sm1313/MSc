@@ -1,0 +1,8 @@
+{
+  SET X := 100 ;
+  SET Y := 90 ;
+  DO Z FROM 1 TO 4 {
+    LT Y
+    FD X
+  }
+}

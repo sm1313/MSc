@@ -1,0 +1,65 @@
+The Record class has remained very much unchanged over the development of the program. I imagined that I may need to manipulate entries with or without an index, so I made multiple methods for some functionalities. This was the same for the Table class, and is observed more heavily in there.
+
+When keys were added a few more methods were added so you could manipulate a record by using its key.
+
+When database functionality was added, the table create method had to be redesigned so that it was created in the database folder.
+
+At this point, I attempted to make a way of escaping certain characters that I use as markers in the plain text files, but this ended up being more work than I thought it was worth, and I decided to focus on other things.
+
+When types were added I created a column class and had to refactor a lot, since previously all I had were column names stored.
+Keys also had to be majorly overhauled to account for:
+    primary keys consisting of more than one column
+    foreign keys
+
+All throughout, different methods had to change what they return when they 'fail', depending on what calls it, and error messages had to be relocated since some methods may be used by things which would consider the method 'failing' a success for their own means.
+
+As development went on, it became increasingly difficult to keep the Column class within the Table class, as operations in the interface would require access to columns. I managed to retain the structure, however the code in the DB class is sprawling and repetitive as a result, since I cannot reference columns directly; I have to pass them to functions which use them in the same line as finding them, and keep doing this even if I need the very same column.
+If I had more time, I would move around some of the command functions so that they call functions inside the table class, allowing for easier and cleaner access to table properties. This would also mean table manipulation is confined a lot more to inside the table class (for example unions and joins are currently done in the DB class).
+
+My favourite part of the assignment was finally printing tables neatly (previously I had just set a width and used it everywhere, with no decoration). I created a Display class and moved all output code in there, allowing for a potential graphical interface (which I did not have time for), and it feels very neat and tidy. Of course, error messages and prompts are still printed via System.err within each relevant function, and major refactoring would be needed to incorporate these into any other interface.
+
+I have chosen to store tables and metadata in plain .txt files. Please note that I do not accept any responsibility for any exceptions or errors that are thrown should you go changing these by hand; these files are meant for my program's eyes only.
+That said, I have made sure that some instances of file-reading errors are handled properly and exit the program gracefully rather than exception-ally. Again, if I had more time I would prepare for any and every eventuality with corrupted .txt files. 
+
+--LANGUAGE--
+
+LIST
+Type 'LIST' to see a list of tables in the current database.
+Type 'LIST <TABLE_NAME>' to see a list of columns in the given table.
+
+DETAIL
+Type 'DETAIL <TABLE_NAME>' to see a list of column names in the given table with their keys and (if relevant) where the foreign keys refer to, in the format DATABASE-TABLE-COLUMN
+
+TABLE
+Type 'TABLE <TABLE_NAME>' to push the given table to the top of the stack. If the table does not exist then the user will be prompted as to whether they would like to create it or not (an empty table with the given TABLE_NAME will then be pushed to the top of the stack).
+
+UNION
+Type 'UNION' to union together the two tables on top of the stack. Their columns must match precisely. The resulting table will then be pushed onto the stack (removing the two previous tables).
+
+JOIN
+Type 'JOIN <COLUMN_1_NAME> ...' to join the two tables on top of the stack on their columns which match on name only. The resulting table will have columns 1 to N.
+
+NEW
+Type 'NEW <COLUMN_1_NAME> <COLUMN_1_TYPE> ... <COLUMN_N_NAME> <COLUMN_N_TYPE>' to create a new table with the given columns 1 to N and their types. The user will then be prompted for a name for the resulting table. 
+
+SAVE
+Type 'SAVE <TABLE_NAME>' to save the current table (top of the stack) as the given TABLE_NAME. If the table already exists the user will be prompted as to whether they would like to overwrite it. If it does not exist, the user will be prompted anyway to make sure they would like to save a new table with the given TABLE_NAME.
+
+COLUMNS
+Type 'COLUMNS <COLUMN_1_NAME> ... <COLUMN_N_NAME>' to keep only the given columns 1 to N in the current table (top of the stack). The resulting table will have removed all other columns.
+
+ROWS
+Type 'ROWS <COLUMN_NAME> <CONDITION> <VALUE>' to keep only the rows where the given condition holds for each row. The conditions can be {=, <, >, !=, <=, >=} and each row's relevant entry in the given column will be compared to the given value. Any column type can be compared in this way.
+
+RENAME
+Type 'RENAME <COLUMN_NAME> <NEW_NAME>' to rename the given column to the given new name.
+
+APPEND
+Type 'APPEND <COLUMN_NAME> <COLUMN_TYPE>' to add a column to the current table with the given name and type. This may only be done to an empty table. 
+
+INSERT
+Type 'INSERT <VALUE_1> ... <VALUE_N>' to add a row to the current table with the given values.
+
+KEY
+Type 'KEY <COLUMN_NAME> <KEY_TYPE> <REFERENCE>' to add a key of the given type to the given column. If the key type is foreign, a reference must be given in the form 'DATABASE-TABLE-COLUMN', which will be where the foreign key comes from. The given type may be 'PRIMARY', 'FOREIGN', or 'REMOVE', which will remove any key from the given column.
+

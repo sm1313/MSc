@@ -1,0 +1,10 @@
+{
+  SET A := 100 ;
+  SET B := 190 A - ;
+  SET C := 6 A B - + ;
+  SET D := C C / ;
+  DO E FROM D TO C {
+    LT B
+    FD A
+  }
+}

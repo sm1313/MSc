@@ -1,0 +1,6 @@
+{
+  DO N FROM 1 TO 4 {
+    LT 90
+    FD 100
+  }
+}

@@ -1,0 +1,10 @@
+{
+  SET P := 100 ;
+  SET Q := 90 ;
+  SET I := 1 ;
+  SET J := 4 ;
+  DO K FROM I TO J {
+    LT Q 
+    FD P
+  }
+}
